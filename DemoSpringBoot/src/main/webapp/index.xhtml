@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="jakarta.faces.core">
+
+<f:view>
+    <h:head>
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+        <script>
+            function chartExtender() {
+        var options = {
+                plugins: [ChartDataLabels],
+                options: {
+                   plugins: {
+                      // Change options for ALL labels of THIS CHART
+                      datalabels: {
+                         color: 'HotPink'
+                      }
+                   }
+                },
+                data: {
+                   datasets: [{
+                      // Change options only for labels of THIS DATASET
+                      datalabels: {
+                         color: 'Indigo'
+                      }
+                   }]
+                }
+             };
+
+             //merge all options into the main chart options
+             $.extend(true, this.cfg.config, options);
+    }
+        </script>
+    </h:head>
+
+    <h:body>
+        <p:chart value="#{test.createPieModel()}" extender="chartExtender"/>
+    </h:body>
+</f:view>
+</html>
